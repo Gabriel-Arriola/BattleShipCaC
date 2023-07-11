@@ -4,6 +4,7 @@
 El proyecto consta de un juego que simula el clasico Batalla Naval pero de un unico jugador.
 
 El mismo permite:
+
     * Crear un usuario y loguearlo en el sistema
     * Crear y borrar una partida
     * Jugar en el tablero
