@@ -75,12 +75,13 @@ const login = async () => {
 
 const logout = async () => {
     try {
-        const respuesta = await axios.post('https://arriolagabriel.pythonanywhere.com/logout', {
-        }).then(() => {
+        const respuesta = await axios.get('https://arriolagabriel.pythonanywhere.com/logout')
+            .then(() => {
             sessionStorage.removeItem('userid')
             sessionStorage.removeItem('barcos')
             sessionStorage.clear()
             alert("Nos vemos pronto!");
+            location.href = './index.html';
         });
     } catch (error) {
         console.log(error);
