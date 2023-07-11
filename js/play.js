@@ -97,7 +97,7 @@ const crear_tablero_usuario = async () => {
         if (sessionStorage.getItem('barcos') > 0)
             borrar_tablero();
         try {
-            const respuesta = await axios.post('https://arriolagabriel.pythonanywhere.com/usuario', {
+            const respuesta = await axios.post('https://arriolagabriel.pythonanywhere.com/tablero/usuario', {
                 params: {
                     user_id: sessionStorage.getItem('userid')
                 },
@@ -115,7 +115,7 @@ const crear_tablero_usuario = async () => {
 const borrar_tablero = async () => {
     if (sessionStorage.getItem("partida") != null) {
         try {
-            const respuesta = await axios.delete('https://arriolagabriel.pythonanywhere.com/borrar', {
+            const respuesta = await axios.delete('https://arriolagabriel.pythonanywhere.com/tablero/borrar', {
                 data: {
                     partida: sessionStorage.getItem('partida')
                 },
@@ -146,7 +146,7 @@ const ver_tablero_usuario = async () => {
 
 const disparo = async () => {
     try {
-        const respuesta = await axios.put('https://arriolagabriel.pythonanywhere.com/disparo', {
+        const respuesta = await axios.put('https://arriolagabriel.pythonanywhere.com/tablero/disparo', {
             params: {
                 barcos: sessionStorage.getItem('barcos'),
                 disparos: sessionStorage.getItem('disparos'),
