@@ -104,7 +104,7 @@ const crear_tablero_usuario = async () => {
             })
             sessionStorage.setItem('barcos', respuesta.data.barcos);
             sessionStorage.setItem('partida', respuesta.data.partida);
-            sessionStorage.setItem('disparos', 1);
+            sessionStorage.setItem('disparos', 0);
             sessionStorage.setItem('coordenada', '');
         } catch (error) {
             console.log(error);
