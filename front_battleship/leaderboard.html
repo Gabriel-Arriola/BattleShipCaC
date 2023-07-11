@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>BattleShip CaC</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="./img/cruise-ship.jpg" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.dark.min.css" />
+</head>
+
+<body>
+    <!-- Start your project here-->
+    <div class="container bg-dark ">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="./index.html">
+                        <img src="./img/barco.png" height="50" alt="BattleShip" loading="lazy" style="opacity: 0.5;" />
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./leaderboard.html">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./play.html">Jugar</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
+
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <!-- Avatar -->
+                    <div class="dropdown">
+                        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                            id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="./img/pirata.png" class="rounded-circle" height="35" alt="Pirata"
+                                loading="lazy" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                            <li>
+                                <a class="dropdown-item" href="./index.html" onclick="logout()">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <br><br><br>
+<h3 style="text-align: center;">Ranking de ganadores</h3>
+        <table id="rank" class="table align-middle mb-0 bg-dark">
+            <thead class="bg-dark">
+                <tr>
+                    <th>Usuario</th>
+                    <th>Juego Num.</th>
+                    <th>Total de disparos</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+   
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="./js/script.js"></script>
+    <script type="text/javascript" src="./js/play.js"></script>
+    <script>
+        axios.get('http://localhost:5000/ranking')
+        .then(function(response) {
+            const data = response.data.ranking;
+
+            // Obtener la referencia del tbody de la tabla
+            const tbody = document.querySelector('#rank tbody');
+
+            // Recorrer los datos y crear las filas y celdas
+            data.forEach(function(item) {
+                const row = document.createElement('tr');
+
+                const username = document.createElement('td');
+                const griduser = document.createElement('div');
+                griduser.className = 'd-flex align-items-center';
+                const img = document.createElement('img');
+                img.src = "./img/smileyPirate.png";
+                img.style = 'width: 45px; height: 45px';
+                img.className = 'rounded-circle'
+                griduser.appendChild(img);
+                const gridname = document.createElement('div');
+                gridname.className = 'ms-3';
+                const name1 = document.createElement('p');
+                name1.className = 'fw-bold mb-1';
+                name1.textContent = item.name;
+                gridname.appendChild(name1);
+                const mail = document.createElement('p');
+                mail.className = 'text-muted mb-0';
+                mail.textContent = item.email;
+                gridname.appendChild(mail);
+                griduser.appendChild(gridname);
+                username.appendChild(griduser);
+                row.appendChild(username);
+
+
+                const partida = document.createElement('td');
+                const ppartida = document.createElement('p');
+                ppartida.className = 'fw-normal mb-1';
+                ppartida.textContent = item.partida;
+                partida.appendChild(ppartida);
+                row.appendChild(partida);
+
+
+                const disparos = document.createElement('td');
+                const spdisparos = document.createElement('span');
+                spdisparos.className = 'badge badge-success rounded-pill d-inline';
+                spdisparos.textContent = item.disparos;
+                disparos.appendChild(spdisparos);
+                row.appendChild(disparos);
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(function(error) {
+            console.error('Error al obtener los datos:', error);
+        });
+    </script>
+</body>
+
+</html>
