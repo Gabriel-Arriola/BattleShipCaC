@@ -74,13 +74,13 @@ const login = async () => {
 }
 
 const logout = async () => {
-    if(sessionStorage.getItem('userid') != null){
+    if(sessionStorage.getItem('userid') != ''){
         try {
             const respuesta = await axios.post('https://arriolagabriel.pythonanywhere.com/logout', {
             }).then(() => {
                 alert("Nos vemos pronto!");
-                sessionStorage.removeItem('userid')
-                sessionStorage.removeItem('barcos')
+                sessionStorage.setItem('userid', '')
+                sessionStorage.setItem('barcos', 0)
                 sessionStorage.clear()
             });
         } catch (error) {
